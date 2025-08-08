@@ -1,0 +1,194 @@
+<head>
+	<meta charset="UTF-8">
+	<style>
+    table.tax-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 10px;
+				table-layout: fixed;
+    }
+    table.tax-table, table.tax-table td, table.tax-table td {
+        border: 1px solid black;
+        text-align: center;
+        vertical-align: middle;
+    }
+    table.tax-table td, table.tax-table td {
+        padding: 1px;
+        word-wrap: break-word; /* Allow text to wrap instead of overflowing */
+				overflow: hidden;  /* prevent text from spilling over */
+				/* text-overflow: ellipsis;
+				white-space: nowrap; */
+				text-overflow: clip;
+				white-space: normal;
+    }
+    .no-border {
+        border: none !important;
+    }
+	</style>
+</head>
+
+<div class="table-container">
+	<table class="tax-table">
+		<tr>
+			<td colspan="2" rowspan="2"><img src="/assets/statutory_compliance/images/logo1.png" alt="Logo1"/></td>
+			<td colspan="24" style="font-size:14px;">GHANA REVENUE AUTHORITY</td>
+			<td colspan="2" rowspan="2"><img src="/assets/statutory_compliance/images/logo2.png" alt="Logo2"/></td>
+		</tr>
+		<tr>
+			<td colspan="24">DOMESTIC TAX REVENUE DIVISION</td>
+		</tr>
+		<tr>
+			<td colspan="28">EMPLOYER&#8217;S MONTHLY TAX DEDUCTIONS SCHEDULE (P. A. Y. E.)</td>
+		</tr>
+		<tr>
+			<td colspan="5" style="text-align:left;">CURRENT TAX OFFICE:</td>
+			<td>LTO</td>
+			<td>MTO</td>
+			<td>STO</td>
+			<td colspan="11" style="text-align:left;">{{ data.custom_tax_office }}</td>
+			<td colspan="9" rowspan="3">For the month of: {{data.date}}</td>
+		</tr>
+		<tr>
+			<td colspan="5" style="text-align:left;">NAME OF EMPLOYER:</td>
+			<td colspan="14" style="text-align:left;">{{ data.company_name }}</td>
+		</tr>
+		<tr>
+			<td colspan="5" style="text-align:left;">EMPLOYER&#8217;S TIN/GH. CARD NO:</td>
+			{% let tin = data.company_custom_tngh_card_number || "" %}
+			{% for (let i = 0; i < 14; i++) { %}
+    			<td>{{ tin[i] || "" }}</td>
+			{% } %}
+		</tr>
+		<tr>
+			<td>1</td>
+			<td>2</td>
+			<td>3</td>
+			<td>4</td>
+			<td>5</td>
+			<td>6</td>
+			<td>7</td>
+			<td>8</td>
+			<td>9</td>
+			<td>10</td>
+			<td>11</td>
+			<td>12</td>
+			<td>13</td>
+			<td>14</td>
+			<td>15</td>
+			<td>16</td>
+			<td>17</td>
+			<td>18</td>
+			<td>19</td>
+			<td>20</td>
+			<td>21</td>
+			<td>22</td>
+			<td>23</td>
+			<td>24</td>
+			<td>25</td>
+			<td>26</td>
+			<td>27</td>
+			<td>28</td>
+		</tr>
+		<tr>
+			<td>Ser. No.</td>
+			<td>TIN/GH. CARD NO.</td>
+			<td>Name Of Employee</td>
+			<td>Position</td>
+			<td>Residency/Part-Time/Casual</td>
+			<td>Basic Salary</td>
+			<td>Secondary Employment(Yes/No)</td>
+			<td>Paid SSNIT (Yes/No)</td>
+			<td>Social Security Fund</td>
+			<td>Third Tier</td>
+			<td>Cash Allowances</td>
+			<td>Bonus Income(up to 15% of Annual Basic Salary)</td>
+			<td>Final Tax on Bonus Income</td>
+			<td>Excess Bonus</td>
+			<td>Total Cash Emolument(6+11+14)</td>
+			<td>Accommodation Element</td>
+			<td>Vehicle Element</td>
+			<td>Non Cash Benefit</td>
+			<td>Total Assessable Income(15+16+17+18)</td>
+			<td>Deductible Reliefs</td>
+			<td>Total Reliefs(9+10+20)</td>
+			<td>Chargeable Income(19-21)</td>
+			<td>Tax Deductible</td>
+			<td>Overtime Income</td>
+			<td>Overtime Tax</td>
+			<td>Total Tax Payable to GRA(13+23+25)</td>
+			<td>Severance Pay Paid</td>
+			<td>Remarks</td>
+		</tr>
+
+		{% $.each(data.employee, (idx, row) => { %}
+			<tr>
+				<td>{{ idx + 1 }}</td>
+				<td>{{ row.custom_tingh_card_number }}</td>
+				<td>{{ row.employee_name }}</td>
+				<td>{{ row.position }}</td>
+				<td>{{ row.employment_type }}</td>
+				<td>{{ row.basic_salary}}</td>
+				<td>{{ row.custom_secondary_employment}}</td>
+				<td>{{ row.custom_allow_to_contribute }}</td>
+				<td>{{ row.social_security_fund}}</td>
+				<td>{{ row.third_tier }}</td>
+				<td>{{ row.cash_allowances}}</td>
+				<td>{{ row.bonus_income }}</td>
+				<td>{{ row.final_tax_bonus }}</td>
+				<td>{{ row.excess_bonus }}</td>
+				<td>{{ row.total_cash_emolument}}</td>
+				<td>{{ row.custom_accommodation_element }}</td>
+				<td>{{ row.custom_vehicle_element }}</td>
+				<td>{{ row.custom_non_cash_benefit }}</td>
+				<td>{{ row.total_assessable_income }}</td>
+				<td>{{ row.custom_deductible_reliefs }}</td>
+				<td>{{ row.total_reliefs }}</td>
+				<td>{{ row.chargeable_income }}</td>
+				<td>{{ row.tax_deductible }}</td>
+				<td>{{ row.overtime_income }}</td>
+				<td>{{ row.overtime_tax }}</td>
+				<td>{{ row.total_tax_payable_to_gra }}</td>
+				<td>{{ row.severance_pay_paid }}</td>
+				<td></td>
+			</tr>
+		{% }) %}
+
+		<tr>
+			<td colspan="14" style="text-align:right;">Total:</td>
+			<td>{{ data.totals.total_cash_emolument }}</td>
+			<td>{{ data.totals.custom_accommodation_element }}</td>
+			<td>{{ data.totals.custom_vehicle_element }}</td>
+			<td>{{ data.totals.custom_non_cash_benefit }}</td>
+			<td>{{ data.totals.total_assessable_income }}</td>
+			<td>{{ data.totals.custom_deductible_reliefs }}</td>
+			<td>{{ data.totals.total_reliefs }}</td>
+			<td>{{ data.totals.chargeable_income }}</td>
+			<td>{{ data.totals.tax_deductible }}</td>
+			<td>{{ data.totals.overtime_income }}</td>
+			<td>{{ data.totals.overtime_tax }}</td>
+			<td>{{ data.totals.total_tax_payable_to_gra }}</td>
+			<td>{{ data.totals.severance_pay_paid }}</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td colspan="28">Declaration</td>
+		</tr>
+		<tr>
+			<td colspan="28" style="text-align:left;">
+				I, __________________________________________________________________________________________________ hereby declare that the information provided above is true and correct.
+			</td>
+		</tr>
+		<tr>
+			<td colspan="10" style="text-align:left;">Position:</td>
+			<td colspan="10" style="text-align:left;">Signature:</td>
+			<td colspan="8" style="text-align:left;">Date:</td>
+		</tr>
+		<tr>
+			<td colspan="28">Internal Use Only</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align:left;">Vetted By:</td>
+			<td colspan="24"></td>
+		</tr>
+	</table>
+</div>
